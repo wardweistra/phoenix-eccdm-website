@@ -1,0 +1,65 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 7
+
+  deploy:
+    # Runs only on main, and only once the bunny.net storage zone is configured.
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.BUNNY_STORAGE_ZONE != ''
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+      - name: Upload to bunny.net storage
+        env:
+          ZONE: ${{ vars.BUNNY_STORAGE_ZONE }}
+          STORAGE_HOST: ${{ vars.BUNNY_STORAGE_HOST || 'storage.bunnycdn.com' }}
+          STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
+        run: |
+          cd dist
+          find . -type f | sed 's|^\./||' | while read -r file; do
+            curl --fail --silent --show-error --retry 3 \
+              -X PUT "https://${STORAGE_HOST}/${ZONE}/${file}" \
+              -H "AccessKey: ${STORAGE_PASSWORD}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary "@${file}" > /dev/null
+            echo "uploaded ${file}"
+          done
+      - name: Purge CDN cache
+        env:
+          PULLZONE_ID: ${{ vars.BUNNY_PULLZONE_ID }}
+          API_KEY: ${{ secrets.BUNNY_API_KEY }}
+        run: |
+          curl --fail --silent --show-error -X POST \
+            "https://api.bunny.net/pullzone/${PULLZONE_ID}/purgeCache" \
+            -H "AccessKey: ${API_KEY}" -H "Content-Length: 0"

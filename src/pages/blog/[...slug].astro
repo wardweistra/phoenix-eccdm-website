@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title={post.data.title} description={post.data.description}>
+  <article class="wrap post">
+    <p><a href="/blog/">← All posts</a></p>
+    <h1>{post.data.title}</h1>
+    <p class="meta">
+      <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+      {post.data.author && <span> · {post.data.author}</span>}
+    </p>
+    <div class="prose"><Content /></div>
+  </article>
+</Base>
+
+<style>
+  .post { max-width: 44rem; padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+  .post h1 { font-size: clamp(2rem, 5vw, 3rem); margin-top: 1rem; }
+  .meta { color: var(--muted); font-size: .95rem; margin-bottom: 2rem; }
+  .prose :global(h2) { font-size: 1.6rem; margin-top: 2em; }
+  .prose :global(h3) { margin-top: 1.6em; }
+  .prose :global(img) { max-width: 100%; height: auto; border-radius: var(--radius); }
+  .prose :global(li) { margin-bottom: .4em; }
+  .prose :global(blockquote) { margin: 1.5em 0; padding-left: 1.2em; border-left: 4px solid var(--accent); color: var(--muted); }
+  .prose :global(pre) { overflow-x: auto; padding: 1rem; border-radius: 10px; }
+</style>

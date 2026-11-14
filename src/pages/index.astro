@@ -1,0 +1,155 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { site, links, actions } from '../data/site';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const layers = [
+  { name: 'Conceptual model', text: 'A simplified, platform-independent view of the cancer domain: the key concepts and how they relate.' },
+  { name: 'Logical model', text: 'The same concepts in detail, with the data elements needed to record them.' },
+  { name: 'HL7 FHIR profiles', text: 'A FHIR R4 representation for exchanging cancer data between care systems.' },
+  { name: 'OMOP mappings', text: 'Documented mappings so the same data can feed OMOP-based research infrastructure.' },
+];
+const lineage = ['IDEA4RC', 'PanCareSurPass', 'FLUTE', 'MEDOC minimal dataset', 'mCODE (inspiration)'];
+---
+<Base>
+  <section class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Phoenix Initiative · HL7 Europe</p>
+        <h1>One shared model for <em>cancer data</em> across Europe.</h1>
+        <p class="hero-lede">
+          The European Common Cancer Data Model (ECCDM) lets hospitals, registries and researchers
+          describe cancer the same way, so data can move between care and research without being
+          rebuilt each time.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href={links.guide}>Use the ECCDM</a>
+          <a class="btn ghost" href="#get-involved">Four ways to get involved</a>
+        </div>
+      </div>
+      <ul class="facts" aria-label="Key facts">
+        <li><b>Any cancer type</b><span>Agnostic by design, extended in stages</span></li>
+        <li><b>FHIR + OMOP</b><span>Care exchange and research, one model</span></li>
+        <li><b>Open</b><span>Published by HL7 Europe under CC0</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="model">
+    <div class="wrap">
+      <p class="eyebrow">The model</p>
+      <h2>Minimal, shared and built to be extended</h2>
+      <p class="lede">
+        The ECCDM starts from what every cancer record has in common and adds detail in layers.
+        Adopt the layer that matches your systems; they all describe the same thing.
+      </p>
+      <ol class="layers">
+        {layers.map((l, i) => (
+          <li>
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{l.name}</h3>
+            <p>{l.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="lineage">
+        <span>Builds on experience from</span>
+        <ul>{lineage.map((x) => <li>{x}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="get-involved" class="involve">
+    <div class="wrap">
+      <p class="eyebrow">Get involved</p>
+      <h2>Four steps, each one optional</h2>
+      <p class="lede">Start by using the model. Go as far as you like from there.</p>
+      <ol class="steps">
+        {actions.map((a) => (
+          <li>
+            <span class="step-n" aria-hidden="true">{a.step}</span>
+            <h3>{a.title}</h3>
+            <p>{a.body}</p>
+            <a class="step-link" href={a.href}>{a.cta} <span aria-hidden="true">→</span></a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section id="news">
+      <div class="wrap">
+        <p class="eyebrow">From the blog</p>
+        <h2>Latest updates</h2>
+        <ul class="post-list">
+          {posts.map((p) => (
+            <li>
+              <a class="post-card" href={`/blog/${p.id}/`}>
+                <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+                <h3>{p.data.title}</h3>
+                <p>{p.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p style="margin-top:1.5rem"><a href="/blog/">All posts →</a></p>
+      </div>
+    </section>
+  )}
+
+  <section class="closing">
+    <div class="wrap">
+      <h2>Your data already describes cancer. Describe it the common way.</h2>
+      <a class="btn" href={links.guide}>Open the implementation guide</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { position: relative; overflow: hidden; background: var(--navy); color: var(--navy-ink); padding: clamp(4rem, 11vw, 8rem) 0 clamp(3.5rem, 8vw, 6rem); }
+  .glow { position: absolute; inset: auto -10% -55% auto; width: 70vmax; height: 70vmax; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(242,121,58,.55), rgba(246,184,75,.18) 55%, transparent 72%); filter: blur(10px); animation: rise 9s ease-in-out infinite alternate; }
+  @keyframes rise { to { transform: translate(-4%, -6%) scale(1.08); } }
+  @media (prefers-reduced-motion: reduce) { .glow { animation: none; } }
+  .hero-grid { position: relative; display: grid; gap: 3rem; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: end; }
+  @media (max-width: 820px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero .eyebrow { color: var(--gold); }
+  .hero h1 em { font-style: italic; color: var(--ember); }
+  .hero-lede { font-size: 1.25rem; color: var(--navy-muted); max-width: 38rem; }
+  .hero-cta { display: flex; gap: .9rem; flex-wrap: wrap; margin-top: 2rem; }
+  .hero .btn { background: var(--ember); border-color: var(--ember); color: #1a0e05; }
+  .hero .btn.ghost { background: transparent; color: var(--navy-ink); border-color: rgba(244,239,232,.5); }
+  .facts { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; }
+  .facts li { padding: 1rem 1.2rem; border: 1px solid rgba(244,239,232,.18); border-radius: var(--radius); background: rgba(255,255,255,.05); backdrop-filter: blur(6px); }
+  .facts b { display: block; font-family: var(--serif); font-size: 1.25rem; }
+  .facts span { color: var(--navy-muted); font-size: .95rem; }
+
+  .layers { list-style: none; padding: 0; margin: 2.5rem 0 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14.5rem), 1fr)); }
+  .layers li { padding: 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); border-top: 4px solid var(--accent); }
+  .layers .n { font-size: .85rem; font-weight: 700; color: var(--accent); letter-spacing: .1em; }
+  .layers h3 { margin-top: .4rem; }
+  .layers p { color: var(--muted); margin: 0; font-size: .98rem; }
+  .lineage { margin-top: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; color: var(--muted); font-size: .95rem; }
+  .lineage ul { list-style: none; display: flex; gap: .5rem; flex-wrap: wrap; margin: 0; padding: 0; }
+  .lineage li { padding: .25rem .8rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); }
+
+  .involve { background: color-mix(in srgb, var(--accent) 7%, var(--bg)); border-block: 1px solid var(--line); }
+  .steps { list-style: none; padding: 0; margin: 2.5rem 0 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  .steps li { position: relative; display: flex; flex-direction: column; padding: 1.6rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); transition: transform .15s, border-color .15s, box-shadow .15s; }
+  .steps li:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 16px 30px -22px var(--accent); }
+  .step-n { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font: 700 1.2rem var(--serif); margin-bottom: 1rem; }
+  .steps p { color: var(--muted); font-size: .98rem; flex: 1; }
+  .step-link { font-weight: 650; text-decoration: none; }
+  .step-link::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); }
+  .step-link:hover { text-decoration: underline; }
+
+  .closing { text-align: center; }
+  .closing h2 { max-width: 36rem; margin-inline: auto; margin-bottom: 1.5rem; }
+</style>
