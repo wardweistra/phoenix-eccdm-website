@@ -1,5 +1,4 @@
 // Single place for site-wide text and every outbound link.
-// Entries marked TODO are placeholders that still need the real destination.
 
 export const site = {
   name: 'cancermodel.eu',
@@ -18,10 +17,9 @@ export const links = {
   repo: 'https://github.com/hl7-eu/cancer-common',
   issues: 'https://github.com/hl7-eu/cancer-common/issues',
   hl7Europe: 'https://hl7europe.org/',
-  // TODO: replace with the real page or calendar invite for the PHOENIX calls.
-  calls: 'mailto:TODO@example.org?subject=Phoenix%20calls',
-  // TODO: replace with the real PHOENIX membership page or contact.
-  membership: 'mailto:TODO@example.org?subject=Phoenix%20membership',
+  contact: 'mailto:phoenix@hl7europe.org',
+  calls: 'mailto:phoenix@hl7europe.org?subject=Joining%20the%20PHOENIX%20calls',
+  membership: 'mailto:phoenix@hl7europe.org?subject=PHOENIX%20membership',
 };
 
 export const actions = [

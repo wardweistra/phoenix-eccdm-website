@@ -26,8 +26,8 @@ npm run build    # output in dist/
 | CMS configuration | `public/admin/config.yml` |
 | Build and deploy | `.github/workflows/deploy.yml` |
 
-`src/data/site.ts` contains two `TODO` placeholders: the links for the Phoenix calls and for
-Phoenix membership.
+The PHOENIX calls and membership links are emails to phoenix@hl7europe.org; change them in
+`src/data/site.ts` if dedicated pages appear.
 
 ## Editing content
 
