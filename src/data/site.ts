@@ -6,7 +6,7 @@ export const site = {
   title: 'European Common Cancer Data Model',
   tagline: 'One shared model for cancer data across Europe.',
   description:
-    'Adopt the European Common Cancer Data Model (ECCDM) and join the Phoenix Initiative by HL7 Europe.',
+    'Adopt the European Common Cancer Data Model (ECCDM) and join PHOENIX, the HL7 Europe initiative making cancer data interoperable.',
 };
 
 export const links = {
@@ -18,9 +18,9 @@ export const links = {
   repo: 'https://github.com/hl7-eu/cancer-common',
   issues: 'https://github.com/hl7-eu/cancer-common/issues',
   hl7Europe: 'https://hl7europe.org/',
-  // TODO: replace with the real page or calendar invite for the Phoenix calls.
+  // TODO: replace with the real page or calendar invite for the PHOENIX calls.
   calls: 'mailto:TODO@example.org?subject=Phoenix%20calls',
-  // TODO: replace with the real Phoenix membership page or contact.
+  // TODO: replace with the real PHOENIX membership page or contact.
   membership: 'mailto:TODO@example.org?subject=Phoenix%20membership',
 };
 
@@ -28,28 +28,28 @@ export const actions = [
   {
     step: '1',
     title: 'Use the ECCDM',
-    body: 'Read the implementation guide and map your cancer data to the model. It is free to use, with a FHIR representation and mappings to OMOP.',
+    body: 'Read the implementation guide and map your cancer data to the model. The conceptual and logical models are agreed; FHIR and OMOP representations are being built on top.',
     cta: 'Open the guide',
     href: links.guide,
   },
   {
     step: '2',
     title: 'Give feedback on the model',
-    body: 'Tried it on real data? Tell us what fits and what is missing. Every issue raised shapes the next version.',
+    body: 'Tried it on real data? Tell us what fits and what is missing. The first version is a milestone, and feedback decides what comes next.',
     cta: 'Raise an issue',
     href: links.issues,
   },
   {
     step: '3',
-    title: 'Join the Phoenix calls',
-    body: 'Sit in on the working calls where the model is discussed, tested against use cases and extended.',
+    title: 'Join the PHOENIX calls',
+    body: 'Sit in on the working calls where clinicians, researchers and standards experts discuss, test and extend the model.',
     cta: 'Get the invite',
     href: links.calls,
   },
   {
     step: '4',
-    title: 'Become a Phoenix member',
-    body: 'Help steer the initiative: set priorities, contribute expertise and represent your organisation.',
+    title: 'Become a PHOENIX member',
+    body: 'Join the founding organisations in steering the work: set priorities, add capacity and represent your organisation.',
     cta: 'Ask about membership',
     href: links.membership,
   },
