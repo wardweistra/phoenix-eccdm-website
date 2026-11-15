@@ -1,4 +1,4 @@
-# cancermodel.eu
+# Phoenix ECCDM site: cancermodel.eu
 
 Website inviting people to adopt the European Common Cancer Data Model (ECCDM) and join the
 PHOENIX Initiative by HL7 Europe.
