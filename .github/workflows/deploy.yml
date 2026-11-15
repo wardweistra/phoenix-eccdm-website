@@ -45,6 +45,9 @@ jobs:
           missing=""
           [ -n "$ZONE" ] || missing="$missing\n- Variable BUNNY_STORAGE_ZONE"
           [ -n "$PULLZONE_ID" ] || missing="$missing\n- Variable BUNNY_PULLZONE_ID"
+          if [ -n "$PULLZONE_ID" ] && ! [[ "$PULLZONE_ID" =~ ^[0-9]+$ ]]; then
+            missing="$missing\n- Variable BUNNY_PULLZONE_ID must be the pull zone's numeric ID, not its name (got: $PULLZONE_ID)"
+          fi
           [ "$HAS_STORAGE_PASSWORD" = "true" ] || missing="$missing\n- Secret BUNNY_STORAGE_PASSWORD"
           [ "$HAS_API_KEY" = "true" ] || missing="$missing\n- Secret BUNNY_API_KEY"
           if [ -n "$missing" ]; then

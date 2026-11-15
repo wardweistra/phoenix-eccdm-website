@@ -43,7 +43,7 @@ Every push to `main` builds the site. The deploy job runs once these are set und
 | Kind | Name | Value |
 |---|---|---|
 | Variable | `BUNNY_STORAGE_ZONE` | Storage zone name |
-| Variable | `BUNNY_PULLZONE_ID` | Numeric ID of the pull zone in front of the storage zone |
+| Variable | `BUNNY_PULLZONE_ID` | Numeric ID of the pull zone (the number in its dashboard URL, not its name) |
 | Variable | `BUNNY_STORAGE_HOST` | Optional; only if the zone's main region is not Falkenstein (default `storage.bunnycdn.com`) |
 | Secret | `BUNNY_STORAGE_PASSWORD` | Storage zone password (FTP & API access) |
 | Secret | `BUNNY_API_KEY` | Account API key, used to purge the CDN cache |
