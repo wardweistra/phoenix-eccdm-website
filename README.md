@@ -1,7 +1,7 @@
 # cancermodel.eu
 
 Website inviting people to adopt the European Common Cancer Data Model (ECCDM) and join the
-PHOENIX by HL7 Europe.
+PHOENIX Initiative by HL7 Europe.
 
 Static site built with [Astro](https://astro.build), edited through
 [Sveltia CMS](https://github.com/sveltia/sveltia-cms) (git-based: content is Markdown in this
