@@ -31,11 +31,28 @@ jobs:
           retention-days: 7
 
   deploy:
-    # Runs only on main, and only once the bunny.net storage zone is configured.
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.BUNNY_STORAGE_ZONE != ''
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Check bunny.net settings
+        env:
+          ZONE: ${{ vars.BUNNY_STORAGE_ZONE }}
+          PULLZONE_ID: ${{ vars.BUNNY_PULLZONE_ID }}
+          HAS_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD != '' }}
+          HAS_API_KEY: ${{ secrets.BUNNY_API_KEY != '' }}
+        run: |
+          missing=""
+          [ -n "$ZONE" ] || missing="$missing\n- Variable BUNNY_STORAGE_ZONE"
+          [ -n "$PULLZONE_ID" ] || missing="$missing\n- Variable BUNNY_PULLZONE_ID"
+          [ "$HAS_STORAGE_PASSWORD" = "true" ] || missing="$missing\n- Secret BUNNY_STORAGE_PASSWORD"
+          [ "$HAS_API_KEY" = "true" ] || missing="$missing\n- Secret BUNNY_API_KEY"
+          if [ -n "$missing" ]; then
+            echo "::error::Missing bunny.net settings. Add them under Settings > Secrets and variables > Actions, as repository (not environment) variables and secrets:"
+            printf "$missing\n"
+            exit 1
+          fi
+          echo "All bunny.net settings present."
       - uses: actions/download-artifact@v4
         with:
           name: site
