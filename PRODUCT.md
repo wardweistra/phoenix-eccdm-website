@@ -22,7 +22,7 @@ Success means **adoption of the model**: visitors open the implementation guide,
 
 ## Positioning
 
-The ECCDM is developed by the HL7 Europe cancer working group and has a founding coalition: national cancer institutes, comprehensive cancer centres, hospitals, research institutes and a vendor. It builds on earlier research projects (IDEA4RC, PanCareSurPass, FLUTE). It aligns primary and secondary use in one model, is cancer-type agnostic, is designed to be realistic for EHRs, and is published as an HL7 implementation guide with FHIR and OMOP representations. The site's case is that this is the European, standards-body-backed, community-governed model, so others should build on it instead of starting another.
+The ECCDM is developed by PHOENIX (say so plainly; do not describe it as developed by the HL7 Europe cancer working group and handed over, per the user, November 2026) and has a founding coalition: national cancer institutes, comprehensive cancer centres, hospitals, research institutes and a vendor. It builds on earlier research projects (IDEA4RC, PanCareSurPass, FLUTE). It aligns primary and secondary use in one model, is cancer-type agnostic, is designed to be realistic for EHRs, and is published as an HL7 implementation guide with FHIR and OMOP representations. The site's case is that this is the European, standards-body-backed, community-governed model, so others should build on it instead of starting another.
 
 The arguments the initiative already makes, which the site can draw on:
 
