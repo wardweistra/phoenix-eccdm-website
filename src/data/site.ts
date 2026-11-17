@@ -41,7 +41,6 @@ export const actions = [
       body: 'Sign in to HL7 Jira (create a free account if you need one) and choose <b>Create</b>. Pick project <b>FHIR Specification Feedback (FHIR)</b> and specification <b>EU Common Cancer Model (R4) (FHIR)</b>.',
     },
     cta: 'See open issues',
-    via: 'HL7 Jira',
     href: links.issues,
   },
   {
