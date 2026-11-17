@@ -26,8 +26,8 @@ The ECCDM is developed by the HL7 Europe cancer working group and has a founding
 
 The arguments the initiative already makes, which the site can draw on:
 
-- **One backbone, multiple representations.** The ECCDM is a conceptual and logical model ("a model, rather than a dataset"; "a model, rather than a format") with FHIR and OMOP as representations, not another competing format.
-- **Map once.** Today each project builds its own ad hoc FHIR↔OMOP mapping; with the ECCDM, meaning is defined once and mapped once, aligned with mCODE/CodeX and the OHDSI Oncology working group.
+- **One logical model, multiple expressions.** The ECCDM is a single logical model (with its conceptual model; "a model, rather than a dataset") that takes inspiration from many places, including mCODE, and will be expressed in at least HL7 FHIR and OMOP. Describe it in those terms; do not frame it against other standards ("does not compete") (the user's wording, November 2026).
+- **Shared meaning, not a mapping tool.** The ECCDM defines cancer concepts once; FHIR and OMOP are representations of it, aligned with mCODE/CodeX and the OHDSI Oncology working group. **The ECCDM is not a solution for FHIR↔OMOP mappings**; do not present it as one (the user's correction, November 2026, overriding the "map once" line in the kick-off deck).
 - **Collect once, use many times; care first, research second.** Secondary use is derived from well-structured care data instead of re-abstracting data at every step.
 - **The oncology layer for EHDS.** EHDS (Regulation (EU) 2025/327, in force since March 2025, phased application up to 2031) builds on HL7 Europe FHIR specifications (patient summary, laboratory, imaging, discharge report). PHOENIX adds the oncology layer on top (tumour, staging, treatments, outcomes) for primary use, and documented, comparable, OMOP-ready cancer data for secondary use through Health Data Access Bodies.
 - **An accelerator, like CodeX in the US.** PHOENIX is an HL7 Europe accelerator: open, consensus-based, publishing public artefacts, in the mould of HL7 accelerators such as CodeX (mCODE), Vulcan and Helios.
@@ -36,8 +36,8 @@ The arguments the initiative already makes, which the site can draw on:
 
 ## Operating Context
 
-- The calls to action form a ladder (`src/data/site.ts`): use the ECCDM (implementation guide), give feedback (GitHub issues), join the PHOENIX calls (email), become a PHOENIX member (email).
-- Outbound destinations: the published guide at hl7.eu, the continuous build at build.fhir.org, the source and issues at github.com/hl7-eu/cancer-common, hl7europe.org, and phoenix@hl7europe.org.
+- The calls to action form a ladder (`src/data/site.ts`): use the ECCDM (implementation guide), give feedback (issues in HL7 Jira), join the PHOENIX calls (email), become a PHOENIX member (email).
+- Outbound destinations: the published guide at hl7.eu, the continuous build at build.fhir.org, the source at github.com/hl7-eu/cancer-common, open issues in HL7 Jira (jira.hl7.org filter 24865; a free account is needed; new issues go under project "FHIR Specification Feedback (FHIR)", specification "EU Common Cancer Model (R4) (FHIR)"), hl7europe.org, and phoenix@hl7europe.org.
 - The blog carries release notes, implementation stories and meeting summaries.
 - Path from model to practice, as the initiative presents it: agree on meaning (ECCDM) → specify exchange (FHIR profiles and IG) → align for analytics (OMOP mapping, FHIR→OMOP tooling) → test on real data (reference implementations, connectathons) → adopt and feed back (pilots in cancer centres). "We need real implementations to feed the model."
 - Ecosystem PHOENIX positions itself within: ESMO, ECO, EURACAN, OECI, ENCR, EUnetCCC, CANDLE, DIGICORE, FALCON, CancerWatch, UNCAN-Connect, EUCAIM, CodeX, OMOP/OHDSI, Hospitals on FHIR, and vendors such as Epic and InterSystems. These are context, not endorsements or partners; do not present them as such.
@@ -46,7 +46,7 @@ The arguments the initiative already makes, which the site can draw on:
 
 - Static Astro site; content is Markdown in the repo, edited directly or through Sveltia CMS at `/admin/`. Saving in the CMS commits to `main` and triggers a deploy.
 - Deployed to bunny.net storage and CDN in an EU region. **No third-party tracking and no assets or fonts served from outside the EU**: keep hosting and dependencies privacy-first.
-- Model status (November 2026): conceptual and logical models v1 completed and agreed by the working group; implementation guide ballot closed, comment reconciliation pending; OMOP mapping started; FHIR profiling and mapping next; scientific article in preparation. Keep this current; never overstate maturity.
+- Model status (November 2026): conceptual and logical models v1 completed and agreed by the working group; implementation guide ballot closed, comment reconciliation pending; OMOP mapping started; FHIR profiling and mapping in progress; scientific article in preparation. Keep this current; never overstate maturity.
 - Known next domains: model evolution, genomics and new domains, FHIR profiling, formalising the OMOP mapping, implementation and testing, tools, adoption and sustainability. "The first version is a milestone, not the destination."
 - The model is cancer-type agnostic (from breast to paediatric cancers), minimal and extensible: a cancer-history backbone, not an exhaustive dataset.
 - Use cases named: data exchange for direct patient care, computable guidelines, cancer registry reporting, EHR endpoints for clinical trials, trial matching.
@@ -62,7 +62,7 @@ The arguments the initiative already makes, which the site can draw on:
 
 ## Evidence on Hand
 
-- Founding organisations listed on the landing page: HL7 Europe, INCa, IKNL, PSCC, BIH, Centre Antoine Lacassagne, InterSystems Belgium, AP-HP, Charité Berlin, Charleroi Hospital.
+- Founding organisations listed on the landing page (INCa and Charité Berlin have not signed yet and are shown as "Pending"): HL7 Europe, INCa, IKNL, PSCC, BIH, Centre Antoine Lacassagne, InterSystems Belgium, AP-HP, Charité Berlin, Charleroi Hospital.
 - Context statistics on the landing page: 21 million new cancer cases and 10 million deaths worldwide in 2024; 34 million new cases a year projected for 2050.
 - Predecessor projects: IDEA4RC, PanCareSurPass, FLUTE.
 - Evidence of the problem: a survey of European cancer projects by the HL7 Europe working group (Athens, 2024) found heterogeneous models, OMOP/FHIR hard to map, a research focus on secondary use, the cancer journey needing reconstruction, and EHR availability still unknown.
@@ -72,7 +72,7 @@ The arguments the initiative already makes, which the site can draw on:
 
 ## Product Principles
 
-1. **Earn trust with standards bodies.** Credibility, governance and honest maturity status come before persuasion techniques. Show how the ECCDM complements FHIR, OMOP and mCODE rather than competing with them.
+1. **Earn trust with standards bodies.** Credibility, governance and honest maturity status come before persuasion techniques. Show plainly how the ECCDM relates to FHIR, OMOP and mCODE.
 2. **Adoption first.** Every surface should make the path to the implementation guide obvious; involvement in PHOENIX follows from use.
 3. **State status honestly.** Show what is done, in progress and next; never imply the model is more complete than it is.
 4. **European by construction.** Align with EHDS and HL7 Europe, and keep hosting and data handling privacy-first and EU-based.
