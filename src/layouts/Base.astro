@@ -73,7 +73,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     --muted: #4f5b76;
     --line: #dbe2f0;
     --blue: #1a3c8a;
-    --blue-deep: #142f6e;
     --blue-ink: #ffffff;
     --blue-muted: #c9d5f2;
     --accent: #1a3c8a;
@@ -81,7 +80,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     --flame: #e46b23;
     --flame-ink: #c4470f; /* flame for text on light backgrounds: 4.9:1 on white */
     --gold: #fcd800;
-    --red: #db2027;
     --radius: 14px;
     --font: Aptos, 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
     --flame-gradient: linear-gradient(90deg, #fcd800, #f0a11e 35%, #e46b23 60%, #db2027);
@@ -100,7 +98,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
   h3 { font-size: 1.3rem; }
   p { margin: 0 0 1em; text-wrap: pretty; }
-  dd, li { text-wrap: pretty; }
+  dd, li, figcaption { text-wrap: pretty; }
   a { color: var(--accent); text-underline-offset: .18em; }
   a:focus-visible, .btn:focus-visible { outline: 3px solid var(--flame); outline-offset: 3px; border-radius: 4px; }
   .wrap { width: min(1120px, 100% - 2rem); margin-inline: auto; }
@@ -115,7 +113,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     border: 2px solid var(--accent); transition: transform .15s ease, box-shadow .15s ease;
   }
   .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -8px var(--accent); }
-  .btn.ghost { background: transparent; color: inherit; border-color: currentColor; }
   .btn.small { padding: .45rem .95rem; font-size: .92rem; }
 
   .site-header { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
@@ -149,8 +146,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   .legal { flex-basis: 100%; margin: 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.18); font-size: .8rem; }
 
   .post-list { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
-  .post-card { display: block; height: 100%; padding: 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); color: inherit; text-decoration: none; transition: border-color .15s, transform .15s; }
-  .post-card:hover { border-color: var(--blue); box-shadow: 0 14px 28px -22px var(--blue); transform: translateY(-2px); }
+  .post-card { display: block; height: 100%; padding: 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); color: inherit; text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+  .post-card:hover { border-color: var(--blue); box-shadow: 0 14px 28px -22px var(--blue); }
   .post-card time { font-size: .85rem; color: var(--muted); }
   .post-card h2, .post-card h3 { margin: .3rem 0 .4rem; font-size: 1.15rem; }
   .page-title { font-size: clamp(2rem, 5vw, 3.2rem); }
