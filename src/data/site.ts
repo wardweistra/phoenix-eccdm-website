@@ -13,9 +13,10 @@ export const links = {
   guide: 'https://hl7.eu/fhir/cancer-common/',
   // Continuous build: the working draft, changes regularly.
   guideDraft: 'https://build.fhir.org/ig/hl7-eu/cancer-common/',
-  // Source repository and issue tracker for the guide.
+  // Source repository for the guide.
   repo: 'https://github.com/hl7-eu/cancer-common',
-  issues: 'https://github.com/hl7-eu/cancer-common/issues',
+  // Open issues on the guide in HL7 Jira (filter; needs a free HL7 Jira account).
+  issues: 'https://jira.hl7.org/issues/?filter=24865',
   hl7Europe: 'https://hl7europe.org/',
   contact: 'mailto:phoenix@hl7europe.org',
   calls: 'mailto:phoenix@hl7europe.org?subject=Joining%20the%20PHOENIX%20calls',
@@ -35,8 +36,9 @@ export const actions = [
     step: '2',
     title: 'Give feedback on the model',
     body: 'Tried it on real data? Tell us what fits and what is missing. The first version is a milestone, and feedback decides what comes next.',
-    cta: 'Raise an issue',
-    via: 'GitHub',
+    detail: 'Issues are tracked in HL7 Jira (free account). To report one, choose <b>Create</b>, then project <b>FHIR Specification Feedback (FHIR)</b> and specification <b>EU Common Cancer Model (R4) (FHIR)</b>.',
+    cta: 'See open issues',
+    via: 'HL7 Jira',
     href: links.issues,
   },
   {
