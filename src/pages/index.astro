@@ -466,14 +466,15 @@ const founders: { group: string; names: Founder[] }[] = [
   .dev-links a { font-weight: 650; }
 
   /* Get involved */
-  .steps { list-style: none; padding: 0; margin: 2.5rem 0 0; display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
-  .steps li { position: relative; display: flex; flex-direction: column; padding-top: 1.25rem; border-top: 2px solid var(--line); }
+  .steps { list-style: none; padding: 0; margin: 2.5rem 0 0; display: grid; gap: 0 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  /* Each step spans six shared rows, so the links line up across steps whatever the text length or the open disclosure. */
+  .steps li { position: relative; display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; align-content: start; align-items: start; padding-top: 1.25rem; margin-bottom: 2.5rem; border-top: 2px solid var(--line); }
   .steps li::before { content: ''; position: absolute; top: -2px; left: 0; right: 0; height: 2px; background: var(--flame-gradient); transform: scaleX(0); transform-origin: left; transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
   .steps li:hover::before, .steps li:focus-within::before { transform: scaleX(1); }
   @media (prefers-reduced-motion: reduce) { .steps li::before { transition: none; } }
   .step-n { font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--blue); margin-bottom: .9rem; font-variant-numeric: tabular-nums; }
   .steps h3 { font-size: 1.2rem; }
-  .steps p { color: var(--muted); font-size: .98rem; flex: 1; }
+  .steps p { color: var(--muted); font-size: .98rem; margin-bottom: 1.25rem; }
   .step-link { font-weight: 700; text-decoration: none; }
   .step-link::after { content: ''; position: absolute; inset: 0; }
   .steps li:hover .step-link { text-decoration: underline; }
@@ -481,7 +482,7 @@ const founders: { group: string; names: Founder[] }[] = [
   .howto { position: relative; z-index: 1; margin-top: .9rem; font-size: .9rem; }
   .howto summary { cursor: pointer; width: fit-content; color: var(--accent); font-weight: 650; padding-block: .2rem; }
   .howto summary:focus-visible { outline: 3px solid var(--flame); outline-offset: 3px; border-radius: 4px; }
-  .steps .howto p { flex: none; margin: .5rem 0 0; padding: .7rem .85rem; border-radius: 8px; background: var(--tint); color: var(--ink); font-size: .88rem; line-height: 1.5; }
+  .steps .howto p { margin: .5rem 0 0; padding: .7rem .85rem; border-radius: 8px; background: var(--tint); color: var(--ink); font-size: .88rem; line-height: 1.5; }
   .howto b { color: var(--blue); }
 
   /* PHOENIX */
