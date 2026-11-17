@@ -78,15 +78,26 @@ const founders: { group: string; names: Founder[] }[] = [
       </div>
 
       <figure class="hub">
+        <svg class="hub-defs" width="0" height="0" aria-hidden="true">
+          <defs>
+            <linearGradient id="flame" x1="0" x2="1"><stop offset="0" stop-color="#fcd800"/><stop offset=".55" stop-color="#e46b23"/><stop offset="1" stop-color="#db2027"/></linearGradient>
+            <linearGradient id="flame-v" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fcd800"/><stop offset=".55" stop-color="#e46b23"/><stop offset="1" stop-color="#db2027"/></linearGradient>
+          </defs>
+        </svg>
         <div class="hub-diagram" aria-hidden="true">
           <ul class="hub-src"><li>Hospital records</li><li>Cancer registries</li><li>Research projects</li></ul>
           <svg class="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M0 16.7 C55 16.7 45 50 100 50 M0 50 H100 M0 83.3 C55 83.3 45 50 100 50" />
           </svg>
+          <svg class="hub-v" viewBox="0 0 300 40" preserveAspectRatio="none">
+            <path d="M50 0 C50 24 150 16 150 40 M150 0 V40 M250 0 C250 24 150 16 150 40" />
+          </svg>
           <div class="hub-core"><b>ECCDM</b><span>one logical model</span></div>
           <svg class="hub-lines out" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs><linearGradient id="flame" x1="0" x2="1"><stop offset="0" stop-color="#fcd800"/><stop offset=".55" stop-color="#e46b23"/><stop offset="1" stop-color="#db2027"/></linearGradient></defs>
             <path d="M0 50 C55 50 45 25 100 25 M0 50 C55 50 45 75 100 75" />
+          </svg>
+          <svg class="hub-v out" viewBox="0 0 300 40" preserveAspectRatio="none">
+            <path d="M150 0 C150 24 75 16 75 40 M150 0 C150 24 225 16 225 40" />
           </svg>
           <ul class="hub-rep"><li><b>HL7 FHIR</b><span>exchange for care</span></li><li><b>OMOP</b><span>research and reuse</span></li></ul>
         </div>
@@ -376,6 +387,8 @@ const founders: { group: string; names: Founder[] }[] = [
   .hub-lines { width: 100%; height: 100%; overflow: visible; }
   .hub-lines path { fill: none; stroke: rgba(255,255,255,.45); stroke-width: 2; vector-effect: non-scaling-stroke; }
   .hub-lines.out path { stroke: url(#flame); stroke-width: 3; }
+  .hub-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .hub-v { display: none; }
   .hub-core { align-self: center; display: grid; justify-items: center; padding: 1.1rem 1rem; border-radius: var(--radius); background: #fff; color: var(--blue); box-shadow: 0 18px 40px -18px rgba(5, 15, 45, .7); }
   .hub-core b { font-size: 1.35rem; letter-spacing: .02em; }
   .hub-core span { font-size: .8rem; color: var(--muted); white-space: nowrap; }
@@ -392,10 +405,10 @@ const founders: { group: string; names: Founder[] }[] = [
     .hub .hub-src { grid-template-columns: repeat(3, 1fr); grid-auto-rows: auto; }
     .hub-src li { justify-content: center; text-align: center; font-size: .82rem; padding: .5rem .4rem; }
     .hub-lines { display: none; }
-    .hub-core { justify-self: center; margin-block: 1.4rem; position: relative; }
-    .hub-core::before, .hub-core::after { content: ''; position: absolute; left: 50%; width: 2px; height: 1.4rem; transform: translateX(-50%); }
-    .hub-core::before { bottom: 100%; background: rgba(255,255,255,.45); }
-    .hub-core::after { top: 100%; width: 3px; background: linear-gradient(#e46b23, #db2027); }
+    .hub-v { display: block; width: 100%; height: 2.25rem; overflow: visible; }
+    .hub-v path { fill: none; stroke: rgba(255,255,255,.45); stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .hub-v.out path { stroke: url(#flame-v); stroke-width: 3; }
+    .hub-core { justify-self: center; padding: .8rem 1.6rem; }
     .hub .hub-rep { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: .6rem; }
   }
 
@@ -416,8 +429,14 @@ const founders: { group: string; names: Founder[] }[] = [
   .layers b { font-size: 1.1rem; }
   .layers span { color: var(--blue-muted); font-size: .93rem; }
   @media (max-width: 680px) {
-    .layers { grid-template-columns: 1fr; }
-    .layers li + li::before { left: 1.2rem; top: -.5rem; width: 3px; height: .5rem; }
+    .layers { grid-template-columns: 1fr; gap: 0; padding: .4rem 1.25rem; }
+    .layers li { background: none; border-radius: 0; padding: 1rem 0 1rem 1.75rem; }
+    .layers li + li { border-top: 1px solid rgba(255,255,255,.14); }
+    /* A rail with a dot per part replaces the horizontal connectors. */
+    .layers li::before, .layers li + li::before { content: ''; position: absolute; left: 4px; top: 0; bottom: 0; width: 2px; height: auto; background: rgba(255,255,255,.3); }
+    .layers li:first-child::before { top: 1.7rem; }
+    .layers li + li:last-child::before { bottom: auto; height: 1.7rem; }
+    .layers li::after { content: ''; position: absolute; left: 0; top: calc(1.7rem - 5px); width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 3px var(--blue); }
   }
 
 
