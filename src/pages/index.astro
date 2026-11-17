@@ -28,7 +28,7 @@ const layers = [
 const standards = [
   { name: 'HL7 FHIR', role: 'Exchange of patient-level data between EHRs; the basis of the EHDS exchange format.', rel: 'The ECCDM will be expressed in FHIR. Profiling for the implementation guide is in progress.' },
   { name: 'OMOP', org: 'OHDSI', role: 'Analytics and secondary use: cohorts, network studies and real-world evidence.', rel: 'The ECCDM will be expressed in OMOP. Mapping has started, with the OHDSI Oncology working group.' },
-  { name: 'mCODE', org: 'CodeX', role: 'Minimal common oncology data elements on FHIR, developed in the United States.', rel: 'One of the sources the ECCDM draws on. The working group collaborates with mCODE/CodeX.' },
+  { name: 'mCODE', org: 'CodeX', role: 'Minimal common oncology data elements on FHIR, developed in the United States.', rel: 'One of the sources the ECCDM draws on. PHOENIX collaborates with mCODE/CodeX.' },
 ];
 const principles = [
   { k: 'Scope', v: 'Non-exhaustive and cancer-type agnostic' },
@@ -254,12 +254,29 @@ const founders: { group: string; names: Founder[] }[] = [
   <section id="phoenix" class="tinted">
     <div class="wrap">
       <h2>Who is behind it</h2>
+      <div class="kickoff">
+        <figure class="k-main">
+          <img src="/images/kickoff/round-table-1600.webp"
+            srcset="/images/kickoff/round-table-800.webp 800w, /images/kickoff/round-table-1600.webp 1600w"
+            sizes="(max-width: 760px) calc(100vw - 2rem), 690px" width="1600" height="1200" loading="lazy" decoding="async"
+            alt="About twenty participants around a meeting table, looking at a slide that asks how to turn PHOENIX into a collaborative European community rather than another interoperability project." />
+          <figcaption>Round table: how do we make PHOENIX a European community, not just another interoperability project?</figcaption>
+        </figure>
+        <figure class="k-side">
+          <img src="/images/kickoff/how-to-contribute-1600.webp"
+            srcset="/images/kickoff/how-to-contribute-800.webp 800w, /images/kickoff/how-to-contribute-1600.webp 1600w"
+            sizes="(max-width: 760px) calc(100vw - 2rem), 420px" width="1600" height="1314" loading="lazy" decoding="async"
+            alt="A speaker presents a slide titled How to contribute, with two columns: shape the standards and build the community." />
+          <figcaption>How to contribute: shape the standards, build the community.</figcaption>
+        </figure>
+        <p class="k-where">PHOENIX kick-off at Hospitals on FHIR, Pisa, 21 October 2026</p>
+      </div>
       <div class="split">
         <div>
           <p class="lede">
-            The ECCDM was developed by the HL7 Europe cancer working group. PHOENIX, the Patient
-            Health Oncological Expertise Network for International eXchange, now carries it
-            forward with shared capacity instead of project-by-project effort.
+            The ECCDM is developed by PHOENIX, the Patient Health Oncological Expertise Network
+            for International eXchange, which brings care providers, standards developers and
+            implementers together around shared oncology requirements.
           </p>
           <dl class="facts">
             <div><dt>Form</dt><dd>An HL7 Europe accelerator: open, consensus-based, publishing public artefacts.</dd></div>
@@ -487,6 +504,16 @@ const founders: { group: string; names: Founder[] }[] = [
 
   /* PHOENIX */
   #phoenix .split { margin-top: 1rem; }
+  .kickoff { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 1rem 1.25rem; margin: 1.5rem 0 3rem; }
+  .kickoff figure { margin: 0; display: grid; gap: .6rem; align-content: start; }
+  .kickoff img { display: block; width: 100%; height: clamp(15rem, 28vw, 25rem); object-fit: cover; border-radius: var(--radius); background: var(--line); }
+  .k-side img { object-position: 20% 45%; }
+  .kickoff figcaption { font-size: .9rem; color: var(--muted); line-height: 1.45; }
+  .k-where { grid-column: 1 / -1; margin: 0; padding-top: .9rem; border-top: 1px solid var(--line); font-size: .9rem; font-weight: 650; color: var(--blue); }
+  @media (max-width: 760px) {
+    .kickoff { grid-template-columns: 1fr; }
+    .kickoff img { height: auto; aspect-ratio: 4 / 3; }
+  }
   .facts { margin: 1.5rem 0; border-top: 1px solid var(--line); }
   .facts div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--line); }
   .facts dt { font-weight: 700; color: var(--blue); }
