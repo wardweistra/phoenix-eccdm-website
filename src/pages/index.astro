@@ -26,9 +26,9 @@ const layers = [
   { k: 'Implementation guide', v: 'FHIR profiles and OMOP mappings' },
 ];
 const standards = [
-  { name: 'HL7 FHIR', role: 'Exchange of patient-level data between EHRs; the basis of the EHDS exchange format.', rel: 'A representation of the ECCDM. FHIR profiling for the implementation guide is in progress.' },
-  { name: 'OMOP', org: 'OHDSI', role: 'Analytics and secondary use: cohorts, network studies and real-world evidence.', rel: 'A representation of the ECCDM, aligned with the OHDSI Oncology working group.' },
-  { name: 'mCODE', org: 'CodeX', role: 'Minimal common oncology data elements on FHIR, developed in the United States.', rel: 'Aligned. The ECCDM is developed in collaboration with mCODE/CodeX.' },
+  { name: 'HL7 FHIR', role: 'Exchange of patient-level data between EHRs; the basis of the EHDS exchange format.', rel: 'The ECCDM will be expressed in FHIR. Profiling for the implementation guide is in progress.' },
+  { name: 'OMOP', org: 'OHDSI', role: 'Analytics and secondary use: cohorts, network studies and real-world evidence.', rel: 'The ECCDM will be expressed in OMOP. Mapping has started, with the OHDSI Oncology working group.' },
+  { name: 'mCODE', org: 'CodeX', role: 'Minimal common oncology data elements on FHIR, developed in the United States.', rel: 'One of the sources the ECCDM draws on. The working group collaborates with mCODE/CodeX.' },
 ];
 const principles = [
   { k: 'Scope', v: 'Non-exhaustive and cancer-type agnostic' },
@@ -67,8 +67,8 @@ const founders: { group: string; names: Founder[] }[] = [
         <h1>One shared model for cancer data across Europe.</h1>
         <p class="hero-lede">
           The European Common Cancer Data Model (ECCDM) gives hospitals, registries and
-          researchers one way to describe a patient's cancer history. Meaning is defined once,
-          then represented in HL7 FHIR for care and OMOP for research.
+          researchers one way to describe a patient's cancer history: a single logical model,
+          expressed in HL7 FHIR for care and in OMOP for research.
         </p>
         <div class="hero-cta">
           <a class="btn light" href={links.guide}>{guideLabel}</a>
@@ -83,7 +83,7 @@ const founders: { group: string; names: Founder[] }[] = [
           <svg class="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M0 16.7 C55 16.7 45 50 100 50 M0 50 H100 M0 83.3 C55 83.3 45 50 100 50" />
           </svg>
-          <div class="hub-core"><b>ECCDM</b><span>defined once</span></div>
+          <div class="hub-core"><b>ECCDM</b><span>one logical model</span></div>
           <svg class="hub-lines out" viewBox="0 0 100 100" preserveAspectRatio="none">
             <defs><linearGradient id="flame" x1="0" x2="1"><stop offset="0" stop-color="#fcd800"/><stop offset=".55" stop-color="#e46b23"/><stop offset="1" stop-color="#db2027"/></linearGradient></defs>
             <path d="M0 50 C55 50 45 25 100 25 M0 50 C55 50 45 75 100 75" />
@@ -91,8 +91,8 @@ const founders: { group: string; names: Founder[] }[] = [
           <ul class="hub-rep"><li><b>HL7 FHIR</b><span>exchange for care</span></li><li><b>OMOP</b><span>research and reuse</span></li></ul>
         </div>
         <figcaption>
-          Cancer data from hospital records, registries and research projects is described once in
-          the ECCDM, then represented in HL7 FHIR for care and in OMOP for research.
+          Cancer data from hospital records, registries and research projects is described in one
+          logical model, the ECCDM, which is expressed in HL7 FHIR for care and in OMOP for research.
         </figcaption>
       </figure>
     </div>
@@ -128,11 +128,10 @@ const founders: { group: string; names: Founder[] }[] = [
   <section id="model" class="tinted">
     <div class="blob b4" aria-hidden="true"></div>
     <div class="wrap">
-      <h2>Builds on FHIR, OMOP and mCODE. Does not compete with them.</h2>
+      <h2>One logical model, expressed in FHIR and OMOP</h2>
       <p class="lede">
-        The ECCDM is a model rather than a format: a minimal, extensible backbone for cancer
-        history, independent of any one standard and represented in the standards Europe
-        already uses.
+        The ECCDM is a single logical model for cancer history. It draws on many existing
+        sources, including mCODE, and will be expressed in at least HL7 FHIR and OMOP.
       </p>
 
       <ol class="layers" aria-label="Parts of the ECCDM">
@@ -142,7 +141,7 @@ const founders: { group: string; names: Founder[] }[] = [
 
       <div class="table-wrap">
         <table class="standards">
-          <caption>How the ECCDM relates to the standards you use</caption>
+          <caption>How the ECCDM relates to other standards</caption>
           <thead><tr><th scope="col">Standard</th><th scope="col">What it is for</th><th scope="col">Relation to the ECCDM</th></tr></thead>
           <tbody>
             {standards.map((s) => (
@@ -238,9 +237,14 @@ const founders: { group: string; names: Founder[] }[] = [
             <span class="step-n" aria-hidden="true">{a.step}</span>
             <h3>{a.title}</h3>
             <p>{a.body}</p>
-            {a.detail && <p class="detail" set:html={a.detail} />}
             <a class="step-link" href={a.href}>{a.cta} <span aria-hidden="true">→</span></a>
             <span class="via">{a.via}</span>
+            {a.detail && (
+              <details class="howto">
+                <summary>{a.detail.summary}</summary>
+                <p set:html={a.detail.body} />
+              </details>
+            )}
           </li>
         ))}
       </ol>
@@ -277,7 +281,7 @@ const founders: { group: string; names: Founder[] }[] = [
                 <dt>{g.group}</dt>
                 <dd><ul>{g.names.map((n) => typeof n === 'string'
                   ? <li>{n}</li>
-                  : <li>{n.name}{n.pending && <span class="pending">Signature pending</span>}</li>)}</ul></dd>
+                  : <li>{n.name}{n.pending && <span class="pending">Pending</span>}</li>)}</ul></dd>
               </div>
             ))}
           </dl>
@@ -474,8 +478,11 @@ const founders: { group: string; names: Founder[] }[] = [
   .step-link::after { content: ''; position: absolute; inset: 0; }
   .steps li:hover .step-link { text-decoration: underline; }
   .via { font-size: .85rem; color: var(--muted); margin-top: .2rem; }
-  .steps p.detail { flex: 0; font-size: .88rem; padding: .7rem .85rem; border-radius: 8px; background: var(--tint); color: var(--ink); line-height: 1.5; }
-  .detail b { color: var(--blue); }
+  .howto { position: relative; z-index: 1; margin-top: .9rem; font-size: .9rem; }
+  .howto summary { cursor: pointer; width: fit-content; color: var(--accent); font-weight: 650; padding-block: .2rem; }
+  .howto summary:focus-visible { outline: 3px solid var(--flame); outline-offset: 3px; border-radius: 4px; }
+  .steps .howto p { flex: none; margin: .5rem 0 0; padding: .7rem .85rem; border-radius: 8px; background: var(--tint); color: var(--ink); font-size: .88rem; line-height: 1.5; }
+  .howto b { color: var(--blue); }
 
   /* PHOENIX */
   #phoenix .split { margin-top: 1rem; }

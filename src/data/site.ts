@@ -36,7 +36,10 @@ export const actions = [
     step: '2',
     title: 'Give feedback on the model',
     body: 'Tried it on real data? Tell us what fits and what is missing. The first version is a milestone, and feedback decides what comes next.',
-    detail: 'Issues are tracked in HL7 Jira (free account). To report one, choose <b>Create</b>, then project <b>FHIR Specification Feedback (FHIR)</b> and specification <b>EU Common Cancer Model (R4) (FHIR)</b>.',
+    detail: {
+      summary: 'How to report an issue',
+      body: 'Sign in to HL7 Jira (create a free account if you need one) and choose <b>Create</b>. Pick project <b>FHIR Specification Feedback (FHIR)</b> and specification <b>EU Common Cancer Model (R4) (FHIR)</b>.',
+    },
     cta: 'See open issues',
     via: 'HL7 Jira',
     href: links.issues,
