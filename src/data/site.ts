@@ -27,7 +27,8 @@ export const actions = [
     step: '1',
     title: 'Use the ECCDM',
     body: 'Read the implementation guide and map your cancer data to the model. The conceptual and logical models are agreed; FHIR and OMOP representations are being built on top.',
-    cta: 'Open the guide',
+    cta: 'Open the implementation guide',
+    via: 'hl7.eu',
     href: links.guide,
   },
   {
@@ -35,13 +36,15 @@ export const actions = [
     title: 'Give feedback on the model',
     body: 'Tried it on real data? Tell us what fits and what is missing. The first version is a milestone, and feedback decides what comes next.',
     cta: 'Raise an issue',
+    via: 'GitHub',
     href: links.issues,
   },
   {
     step: '3',
     title: 'Join the PHOENIX calls',
     body: 'Sit in on the working calls where clinicians, researchers and standards experts discuss, test and extend the model.',
-    cta: 'Get the invite',
+    cta: 'Email for the invite',
+    via: 'phoenix@hl7europe.org',
     href: links.calls,
   },
   {
@@ -49,6 +52,12 @@ export const actions = [
     title: 'Become a PHOENIX member',
     body: 'Join the founding organisations in steering the work: set priorities, add capacity and represent your organisation.',
     cta: 'Ask about membership',
+    via: 'phoenix@hl7europe.org',
     href: links.membership,
   },
 ];
+
+// Label used for every link to the published implementation guide.
+export const guideLabel = 'Open the implementation guide';
+// Shown under the main guide buttons; update when the guide's status changes.
+export const guideNote = 'HL7 Europe implementation guide · ballot closed, comments being reconciled';
