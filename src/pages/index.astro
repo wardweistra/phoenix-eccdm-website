@@ -238,7 +238,7 @@ const founders: { group: string; names: Founder[] }[] = [
             <h3>{a.title}</h3>
             <p>{a.body}</p>
             <a class="step-link" href={a.href}>{a.cta} <span aria-hidden="true">→</span></a>
-            <span class="via">{a.via}</span>
+            {a.via && <span class="via">{a.via}</span>}
             {a.detail && (
               <details class="howto">
                 <summary>{a.detail.summary}</summary>
@@ -479,7 +479,7 @@ const founders: { group: string; names: Founder[] }[] = [
   .step-link::after { content: ''; position: absolute; inset: 0; }
   .steps li:hover .step-link { text-decoration: underline; }
   .via { font-size: .85rem; color: var(--muted); margin-top: .2rem; }
-  .howto { position: relative; z-index: 1; margin-top: .9rem; font-size: .9rem; }
+  .howto { position: relative; z-index: 1; margin-top: 0; font-size: .85rem; }
   .howto summary { cursor: pointer; width: fit-content; color: var(--accent); font-weight: 650; padding-block: .2rem; }
   .howto summary:focus-visible { outline: 3px solid var(--flame); outline-offset: 3px; border-radius: 4px; }
   .steps .howto p { margin: .5rem 0 0; padding: .7rem .85rem; border-radius: 8px; background: var(--tint); color: var(--ink); font-size: .88rem; line-height: 1.5; }
