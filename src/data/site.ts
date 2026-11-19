@@ -64,4 +64,3 @@ export const actions = [
 // Label used for every link to the published implementation guide.
 export const guideLabel = 'Open the implementation guide';
 // Shown under the main guide buttons; update when the guide's status changes.
-export const guideNote = 'HL7 Europe implementation guide · ballot closed, comments being reconciled';

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { links, actions, guideLabel, guideNote } from '../data/site';
+import { links, actions, guideLabel } from '../data/site';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -13,7 +13,6 @@ const findings = [
   { k: 'Heterogeneity', v: 'Projects describe the same cancer concepts in different models and datasets, so little is reused.' },
   { k: 'Hard to map', v: 'Moving between FHIR and OMOP relies on ad hoc mappings, rebuilt by every project.' },
   { k: 'Research first', v: 'Most models serve secondary use, so the cancer journey has to be reconstructed after the fact.' },
-  { k: 'EHR availability', v: 'Which of these data hospital records can actually supply is still unknown.' },
 ];
 const reasons = [
   { title: 'Patients travel, and so must their data', text: 'Care crosses hospitals, regions and borders. That only works if everyone agrees how to exchange information and how to interpret it.' },
@@ -74,7 +73,6 @@ const founders: { group: string; names: Founder[] }[] = [
           <a class="btn light" href={links.guide}>{guideLabel}</a>
           <a class="text-link" href="#get-involved">Four ways to get involved</a>
         </div>
-        <p class="cta-note">{guideNote}</p>
       </div>
 
       <figure class="hub">
@@ -113,10 +111,10 @@ const founders: { group: string; names: Founder[] }[] = [
     <div class="wrap">
       <div class="split">
         <div>
-          <h2>Europe's cancer projects share concepts, not models.</h2>
+          <h2>Every cancer project models the same history its own way.</h2>
           <p class="lede">
-            In 2024 the HL7 Europe cancer working group surveyed European cancer projects. Each
-            had built its own model for the same cancer history.
+            In 2024 the HL7 Europe cancer working group surveyed European cancer projects and
+            compared how each one records a patient's cancer history.
           </p>
         </div>
         <dl class="findings">
@@ -209,7 +207,7 @@ const founders: { group: string; names: Founder[] }[] = [
 
   <section id="status" class="tinted">
     <div class="wrap">
-      <h2>Version 1 is a milestone, not the destination.</h2>
+      <h2>Where the work stands</h2>
       <p class="asof">Status as of <time datetime={statusDate.iso}>{statusDate.label}</time></p>
       <ol class="track">
         {status.map((s) => (
@@ -378,7 +376,6 @@ const founders: { group: string; names: Founder[] }[] = [
   .btn.outline { background: transparent; border-color: rgba(255,255,255,.6); color: #fff; }
   .text-link { color: #fff; font-weight: 650; text-underline-offset: .25em; }
   .text-link:hover { text-decoration-thickness: 2px; }
-  .cta-note { margin: .9rem 0 0; font-size: .9rem; color: var(--blue-muted); }
 
   .hub { margin: 0; }
   .hub-diagram { display: grid; grid-template-columns: minmax(0, 1fr) 2.75rem auto 2.75rem minmax(0, 1fr); align-items: stretch; }
@@ -460,7 +457,8 @@ const founders: { group: string; names: Founder[] }[] = [
 
   /* EHDS */
   .ehds { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); margin-top: 2.5rem; }
-  .ehds-col { display: grid; gap: .5rem; grid-template-rows: auto 1fr auto; }
+  /* Each column spans three shared rows, so heading, 'adds' and 'provides' line up side by side. */
+  .ehds-col { display: grid; row-gap: .5rem; grid-row: span 3; grid-template-rows: subgrid; }
   .ehds-col h3 { margin-bottom: .5rem; }
   .ehds-col h3 small { display: block; font-size: .85rem; font-weight: 400; color: var(--muted); letter-spacing: 0; margin-top: .2rem; }
   .layer { padding: 1.1rem 1.25rem; border-radius: 10px; }
