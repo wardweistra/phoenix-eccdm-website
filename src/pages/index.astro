@@ -398,6 +398,7 @@ const founders: { group: string; names: Founder[] }[] = [
     .hero-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 520px) {
+    .hero-cta { flex-direction: column; gap: 1.1rem; }
     .hub-diagram { grid-template-columns: 1fr; gap: 0; }
     .hub .hub-src { grid-template-columns: repeat(3, 1fr); grid-auto-rows: auto; }
     .hub-src li { justify-content: center; text-align: center; font-size: .82rem; padding: .5rem .4rem; }
